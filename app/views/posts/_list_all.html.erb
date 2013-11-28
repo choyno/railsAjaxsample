@@ -1,0 +1,24 @@
+<table border="1">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>TITLE</td>
+      <td>BODY</td>
+      <td>ACTION</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |p| %>
+    <tr>
+      <td><%= p[:id]  %></td>
+      <td><%= p[:title]  %></td>
+      <td><%= p[:body]  %></td>
+      <td>
+        <%= link_to "edit", edit_post_path(p), :remote => true  %>
+        |
+        <%= link_to "delete", post_path(p), :method => :delete, :remote => true  %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

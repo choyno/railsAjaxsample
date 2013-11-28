@@ -1,0 +1,7 @@
+<h1>Posts#index</h1>
+<%= link_to "+ add", new_post_path, :remote => true  %>
+<div id="show"></div>
+<div id="list">
+  <%= render("list_all")  %>
+</div>
+<div id="form"></div>

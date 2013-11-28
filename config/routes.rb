@@ -3,11 +3,10 @@ Sample01::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: "samples#index"
+  root to: "posts#index"
 
-  resources :samples
+  resources :posts
 
-  get "show", :to => "samples#show", :as => :show
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
