@@ -1,2 +1,10 @@
+var table = $("table").children("tbody");
+
 $("#show").html("<%= j render("show")  %>")
-$("#list").html("<%= j render("list_all")  %>")
+
+<% if flash[:notice] == 'create' %>
+    $("table").children("tbody").append("<%= j render("add") %>");
+<% elsif flash[:notice] == 'update' %>
+    $(table).find("#<%= @post[:id]  %>").find("#<%= @post[:id]  %>td2").html("<%= @post[:title]  %>");
+    $(table).find("#<%= @post[:id]  %>").find("#<%= @post[:id]  %>td3").html("<%= @post[:body]  %>");
+<% end %>

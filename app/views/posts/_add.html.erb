@@ -1,0 +1,10 @@
+<tr id="<%= @post[:id]  %>">
+  <td id="<%= @post[:id] %>td1"><%= @post[:id]  %></td>
+  <td id="<%= @post[:id] %>td2"><%= @post[:title] %></td>
+  <td id="<%= @post[:id] %>td2"><%= @post[:body] %></td>
+  <td>
+    <%= link_to "edit", edit_post_path(@post), :remote => true  %>
+    |
+    <%= link_to "delete", post_path(@post), :method => :delete, :remote => true  %>
+  </td>
+</tr>
