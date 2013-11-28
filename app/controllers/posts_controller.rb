@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   def index
 
     list_all
@@ -19,7 +20,9 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post)
     else
-      redirect_to posts_path
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
@@ -32,7 +35,9 @@ class PostsController < ApplicationController
     if @post.update_attributes(post_params)
       redirect_to post_path(@post)
     else
-      redirect_to posts_path
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
