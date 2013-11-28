@@ -1,49 +1,58 @@
 class PostsController < ApplicationController
 
-  respond_to :js, :html
-
   def index
-    list_all
-    respond_with
+    @posts = Post.where("delete_flag IS false")
   end
 
   def new
     @post = Post.new
+    respond_to do |format|
+      format.js { render 'common' }
+    end
   end
 
   def create
+
     @post = Post.new(post_params)
+
     if @post.save
-      flash[:notice] = 'create'
-      redirect_to post_path(@post)
-    else
-      respond_with
+      options 'create'
     end
+
+    respond_to do |format|
+      format.js { render 'common' }
+    end
+
   end
 
   def edit
     @post = Post.find(params[:id])
-  end
-
-  def update
-    @post = Post.find(params[:id])
-    if @post.update_attributes(post_params)
-      flash[:notice] = 'update'
-      redirect_to post_path(@post)
-    else
-      respond_with
+    respond_to do |format|
+      format.js { render 'common' }
     end
   end
 
-  def show
+  def update
+
     @post = Post.find(params[:id])
-    respond_with
+
+    if @post.update_attributes(post_params)
+      options 'update'
+    end
+
+    respond_to do |format|
+      format.js { render 'common' }
+    end
+
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.update_attributes(:delete_flag => true)
-    respond_with
+    options 'destroy'
+    respond_to do |format|
+      format.js { render 'common' }
+    end
   end
 
   private
@@ -52,7 +61,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body)
   end
 
-  def list_all
-    @posts = Post.where("delete_flag IS false")
+  def options(option)
+    @con = {:option => option}
   end
+
 end

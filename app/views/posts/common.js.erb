@@ -1,0 +1,24 @@
+var table = $("table").children("tbody");
+
+<% unless @con.present? %>
+
+  $("#form").html("<%= j render("form")  %>")
+
+<% else %>
+
+  <% if @con[:option] == 'create' %>
+
+      $(table).append("<%= j render("add") %>");
+
+  <% elsif @con[:option] == 'update' %>
+
+      $(table).find("#<%= @post[:id]  %>").find("#<%= @post[:id]  %>td2").html("<%= @post[:title]  %>");
+      $(table).find("#<%= @post[:id]  %>").find("#<%= @post[:id]  %>td3").html("<%= @post[:body]  %>");
+
+  <% elsif @con[:option] == 'destroy' %>
+
+      $(table).find("#<%= @post[:id]  %>").hide();
+
+  <% end %>
+
+<% end %>

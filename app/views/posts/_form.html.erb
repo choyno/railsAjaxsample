@@ -1,5 +1,13 @@
 <%= form_for @post, :remote => true do |f|  %>
-<%= f.text_field :title, label: "Title"  %>
-<%= f.text_field :body, label: "Body"  %>
-<%= f.submit  %>
+  <% if @post.errors.full_messages.present? %>
+    <div class="alert alert-error">
+      <% @post.errors.full_messages.each do |err|  %>
+        <%= err %>
+        <br />
+      <% end %>
+    </div>
+  <% end %>
+  <p><%= f.text_field :title, label: "Title"  %></p>
+  <p><%= f.text_area :body, label: "Body"  %></p>
+  <p><%= f.submit :class => "btn btn-primary" %></p>
 <% end %>
