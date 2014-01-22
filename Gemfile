@@ -37,6 +37,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'remotipart', '~> 1.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

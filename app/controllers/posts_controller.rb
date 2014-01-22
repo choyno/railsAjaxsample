@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_filter :find_id, :only => [:edit, :update, :destroy]
+
   def index
     @posts = Post.where("delete_flag IS false")
   end
@@ -26,16 +28,12 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     respond_to do |format|
       format.js { render 'common' }
     end
   end
 
   def update
-
-    @post = Post.find(params[:id])
-
     if @post.update_attributes(post_params)
       options 'update'
     end
@@ -43,11 +41,9 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.js { render 'common' }
     end
-
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.update_attributes(:delete_flag => true)
     options 'destroy'
     respond_to do |format|
@@ -56,6 +52,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def find_id
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :body)
